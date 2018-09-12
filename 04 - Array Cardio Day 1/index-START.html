@@ -34,10 +34,11 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
     const born1500s = inventors.filter(
-      inventor => 1400 < inventor.year && inventor.year < 1501
+      inventor => 1500 < inventor.year && inventor.year < 1601
     )
     // expected output: Nicolaus Copernicus
-    console.log("The list of inventors for those who were born in the 1500's:", born1500s)
+    console.log("The list of inventors for those who were born in the 1500's:")
+    console.table(born1500s)
 
     // --- === ---
 
@@ -47,7 +48,8 @@
       inventor => `${inventor.first} ${inventor.last}`
     )
     // expected output: ['Albert Einstein', 'Isaac Newton', 'Galileo Galilei', 'Marie Curie'...]
-    console.log("An array of the inventors' first and last names:", whatsYourName)
+    console.log("An array of the inventors' first and last names:")
+    console.table(whatsYourName)
 
     // --- === ---
 
@@ -59,7 +61,8 @@
     // ...
     // { first: 'Nicolaus', last: 'Copernicus', year: 1473, passed: 1543 }
     //  ]
-    console.log("Inventors by birthdate, oldest to youngest:", birthdate)
+    console.log("Inventors by birthdate, oldest to youngest:")
+    console.table(birthdate)
 
     // --- === ---
 
@@ -82,13 +85,17 @@
         if (aLived > bLived) return 1
         return 0
       }
-    )
+    ).map(inventor => {
+      inventor.lived = inventor.passed - inventor.year
+      return inventor
+    })
     // expected output: [
     // { first: 'Ada', last: 'Lovelace', year: 1815, passed: 1852 },
     // ...
     // { first: 'Lise', last: 'Meitner', year: 1878, passed: 1968 }
     // ]
-    console.log("The list of inventors by years lived:", yearsLived)
+    console.log("The list of inventors by years lived:")
+    console.table(yearsLived)
 
     // --- === ---
 
@@ -107,10 +114,10 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-    const whatsYourLastName = inventors.sort(
+    const whatsYourLastName = people.sort(
       (a, b) => {
-        const lastAName = a.last.toUpperCase()
-        const lastBName = b.last.toUpperCase()
+        const lastAName = a.toUpperCase()
+        const lastBName = b.toUpperCase()
         if (lastAName < lastBName) return -1
         if (lastAName > lastBName) return 1
         return 0
@@ -121,7 +128,7 @@
     // ...
     // {first: "Max", last: "Planck", year: 1858, passed: 1947}
     // ]
-    console.log("Inventors alphabetically by last name:", whatsYourLastName)
+    console.log("People alphabetically by last name:", whatsYourLastName)
 
     // --- === ---
 
@@ -137,9 +144,9 @@
         }
         return summary
       }
-    , {})
+      , {})
     // expected output: {car: 5, truck: 3, bike: 2, walk: 2, van: 2}
-    console.log(instances)
+    console.table(instances)
 
   </script>
 </body>
